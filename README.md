@@ -26,7 +26,21 @@ We are working on the documentation to help you get started with building plugin
 
 > We recently transitioned from the pages directory to the app directory, which involved significant changes to the project structure and architecture. As a result, you may encounter some inconsistencies or rough edges in the codebase.
 
-## App Architecture
+### Roadmap
+
+- [x] Images & Videos for Search
+- [x] Upload for Vision Model
+- [x] Chat History for Users
+- [x] Shared Chats & Fork
+- [x] Settings for LLMs
+- [x] Custom OG Metadata
+- [ ] Function Calling with Generative UI
+- [ ] Allow Multiple LLMs
+- [ ] Faster API Requests
+- [ ] Use Redis & Postgres
+- [ ] Plugin Development
+
+### App Architecture
 
 - Language: TypeScript
 - Frontend Framework: React
