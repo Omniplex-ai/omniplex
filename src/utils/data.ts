@@ -45,16 +45,7 @@ export const focusOptions = [
 ];
 
 export const MODELS = [
-  { label: "gpt-4-turbo-preview", value: "gpt-4-turbo-preview" },
-  { label: "gpt-4-1106-review", value: "gpt-4-1106-review" },
-  { label: "gpt-4-0613", value: "gpt-4-0613" },
-  { label: "gpt-4-0125-preview", value: "gpt-4-0125-preview" },
-  { label: "gpt-4", value: "gpt-4" },
-  { label: "gpt-3.5-turbo-16k-0613", value: "gpt-3.5-turbo-16k-0613" },
-  { label: "gpt-3.5-turbo-16k", value: "gpt-3.5-turbo-16k" },
-  { label: "gpt-3.5-turbo-1106", value: "gpt-3.5-turbo-1106" },
-  { label: "gpt-3.5-turbo-0613", value: "gpt-3.5-turbo-0613" },
-  { label: "gpt-3.5-turbo-0301", value: "gpt-3.5-turbo-0301" },
-  { label: "gpt-3.5-turbo-0125", value: "gpt-3.5-turbo-0125" },
-  { label: "gpt-3.5-turbo", value: "gpt-3.5-turbo" },
+  { label: "gpt-4", value: "Most powerful GPT-4 model. Best when you need very precise answer. Can Be Slow!" },
+  { label: "gpt-3.5-turbo", value: "Very good model. Best when you need good and fast responses." },
+
 ];
