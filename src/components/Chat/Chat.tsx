@@ -58,7 +58,6 @@ const Chat = (props: Props) => {
   const [isStreaming, setIsStreaming] = useState(false);
   const [controller, setController] = useState<AbortController | null>(null);
   const [error, setError] = useState("");
-  const [errorFunction, setErrorFunction] = useState<Function | null>(null);
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -68,53 +67,114 @@ const Chat = (props: Props) => {
     }
   }, [chatThread?.chats]);
 
-  // Production Code
-  // const [lastProcessedIndex, setLastProcessedIndex] = useState(-1);
-
-  // useEffect(() => {
-  //   if (
-  //     chatThread &&
-  //     chatThread.chats.length > 0 &&
-  //     lastProcessedIndex !== chatThread.chats.length - 1
-  //   ) {
-  //     setIsFetching(false);
-  //     const newChatIndex = chatThread.chats.length - 1;
-  //     const newChat = chatThread.chats[newChatIndex];
-
-  //     if (newChat.mode === "search" && !newChat.searchResults) {
-  //       console.log("Triggering handleSearch");
-  //       handleSearch(chatThread.chats.length - 1)
-  //         .then((searchData) => {
-  //           if (searchData) {
-  //             handleSearchAnswer(searchData);
-  //           }
-  //         })
-  //         .catch((error) => {
-  //           console.error(
-  //             "Error fetching or processing search results:",
-  //             error
-  //           );
-  //           setError("Error fetching or processing search results");
-  //           setErrorFunction(() =>
-  //             handleSearch.bind(null, chatThread.chats.length - 1)
-  //           );
-  //         });
-  //     }
-
-  //     if (newChat.mode !== "search" && !newChat.answer) {
-  //       handleAnswer(newChat);
-  //     } else if (newChat.answer) {
-  //       setIsLoading(false);
-  //       setIsCompleted(true);
-  //     }
-
-  //     setLastProcessedIndex(newChatIndex);
-  //   }
-  // }, [chatThread?.chats.length]);
-
   // Development Code
   const lastProcessedChatRef = useRef<number>(0);
   const chatIdCounterRef = useRef<number>(0);
+
+  // Cache for search results
+  const searchCache = useRef<{ [query: string]: any }>({});
+  const CACHE_TTL = 200 * 1000; // 200 seconds
+
+  // Function to fetch and cache search results
+  const handleSearchAndCache = async (query: string) => {
+    if (searchCache.current[query] && 
+        Date.now() - searchCache.current[query].timestamp < CACHE_TTL) {
+      return searchCache.current[query].data;
+    }
+
+    const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch search results");
+    }
+    const searchData = await response.json();
+    searchCache.current[query] = { data: searchData, timestamp: Date.now() };
+    return searchData;
+  };
+
+  // Combined response function with scrape and chat
+  const handleResponse = async (query: string, question: string) => {
+    setIsLoading(true);
+    setIsCompleted(false);
+    const newController = new AbortController();
+    setController(newController);
+
+    let messages = getInitialMessages({ mode: "chat", question }, "");
+    messages.forEach((message) => {
+      dispatch(addMessage({ threadId: props.id, message }));
+    });
+
+    if (ai.customPrompt.length > 0) {
+      messages.splice(messages.length - 1, 0, {
+        role: "system",
+        content: ai.customPrompt,
+      });
+    }
+
+    try {
+      const response = await fetch("/api/response", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          query,
+          question,
+          messages,
+          model: ai.model, // Assuming GPT-3.5 by default
+          temperature: ai.temperature,
+          max_tokens: ai.maxLength,
+          // ... other parameters
+        }),
+        signal: newController.signal,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch response");
+      }
+
+      setIsLoading(false);
+      if (response.body) {
+        setError("");
+        setIsStreaming(true);
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let answer = "";
+        while (true) {
+          const { value, done } = await reader.read();
+          const text = decoder.decode(value);
+          answer += text;
+          dispatch(
+            updateAnswer({
+              threadId: props.id,
+              chatIndex: chatThread.chats.length - 1,
+              answer: answer,
+            })
+          );
+          if (done) {
+            break;
+          }
+        }
+        dispatch(
+          addMessage({
+            threadId: props.id,
+            message: { role: "assistant", content: answer },
+          })
+        );
+        setIsStreaming(false);
+        setIsCompleted(true);
+        updateFirestore();
+      }
+    } catch (error) {
+      setIsLoading(false);
+      setIsStreaming(false);
+      setIsCompleted(true);
+      if ((error as Error).name === "AbortError") {
+        await updateFirestore();
+        return;
+      }
+      setError("Something went wrong. Please try again later.");
+    } finally {
+      setController(null);
+    }
+  };
 
   useEffect(() => {
     console.log("useEffect triggered");
@@ -129,33 +189,17 @@ const Chat = (props: Props) => {
       if (lastChatId !== lastProcessedChatRef.current) {
         console.log("Last chat ID changed:", lastChatId);
 
-        if (lastChat.mode === "search" && !lastChat.searchResults) {
-          console.log("Triggering handleSearch");
-          handleSearch(chatThread.chats.length - 1)
+        if (lastChat.mode === "search") {
+          handleSearchAndCache(lastChat.query + " " + lastChat.question)
             .then((searchData) => {
-              if (searchData) {
-                handleSearchAnswer(searchData);
-              }
+              handleResponse(lastChat.query, lastChat.question);
             })
             .catch((error) => {
-              console.error(
-                "Error fetching or processing search results:",
-                error
-              );
+              console.error(error);
               setError("Error fetching or processing search results");
-              setErrorFunction(() =>
-                handleSearch.bind(null, chatThread.chats.length - 1)
-              );
             });
-        }
-
-        if (lastChat.mode !== "search" && !lastChat.answer) {
-          console.log("Triggering handleAnswer");
-          handleAnswer(lastChat);
-        } else if (lastChat.answer) {
-          console.log("Setting isLoading to false");
-          setIsLoading(false);
-          setIsCompleted(true);
+        } else {
+          handleResponse("", lastChat.question);
         }
 
         lastProcessedChatRef.current = lastChatId;
@@ -236,216 +280,6 @@ const Chat = (props: Props) => {
     }
   };
 
-  const handleSearch = async (chatIndex: number) => {
-    const chat = chatThread?.chats[chatIndex];
-    console.log("handleSearch called");
-    setIsLoading(true);
-    setIsCompleted(false);
-    if (chat?.mode === "search") {
-      try {
-        const response = await fetch(
-          `/api/search?q=${encodeURIComponent(
-            chat?.query + " " + chat?.question
-          )}`
-        );
-        if (!response.ok) {
-          console.error("Failed to fetch search results");
-          setError("Failed to fetch search results");
-          setErrorFunction(() => handleSearch.bind(null, chatIndex));
-        }
-        const searchData = await response.json();
-        console.log("Search data:", searchData);
-        dispatch(
-          updateSearchResults({
-            threadId: props.id,
-            chatIndex,
-            searchResults: searchData,
-          })
-        );
-        setError("");
-        return searchData;
-      } catch (error) {
-        console.error("Error fetching or processing search results:", error);
-        throw error;
-      }
-    }
-  };
-
-  const handleScrape = async (data: any) => {
-    if (!data || !data.length) return null;
-    try {
-      const urlsToScrape = data.map((item: any) => item.url).join(",");
-      const response = await fetch(`/api/scrape?urls=${urlsToScrape}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-      if (!response.ok)
-        throw new Error(`HTTP error! status: ${response.status}`);
-
-      setError("");
-      return response;
-    } catch (error) {
-      console.error("There was a problem with the fetch operation:", error);
-      setError("There was a problem with the fetch operation");
-      setErrorFunction(() => handleScrape.bind(null, data));
-      throw error;
-    }
-  };
-
-  const handleSearchAnswer = async (searchData: any) => {
-    const data = searchData.data?.webPages.value.slice(0, 3);
-    const scrapedData = await handleScrape(data);
-    if (scrapedData) {
-      const scrapedDataString = await scrapedData.text();
-      const lastChat = chatThread?.chats[chatThread.chats.length - 1];
-      handleAnswer(lastChat, scrapedDataString);
-    } else {
-      console.error("Failed to scrape website data");
-      setError("Failed to scrape website data");
-      setErrorFunction(() => handleSearchAnswer.bind(null, searchData));
-      return null;
-    }
-  };
-
-  const handleAnswer = async (chat: ChatType, scrapedData?: string) => {
-    console.log("handleAnswer called");
-    setIsLoading(true);
-    setIsCompleted(false);
-    const newController = new AbortController();
-    setController(newController);
-
-    let messages: Message[];
-
-    if (chatThread.chats.length > 1) {
-      if (chat.mode !== "search") {
-        messages = [
-          ...chatThread.messages,
-          { role: "user", content: chat.question },
-        ];
-        if (chatThread.chats[0].mode === "image") {
-          messages.shift();
-        }
-
-        dispatch(
-          addMessage({
-            threadId: props.id,
-            message: {
-              role: "user",
-              content: chat.question,
-            },
-          })
-        );
-      } else {
-        messages = chatThread.chats
-          .slice(0, -1)
-          .reduce((acc, prevChat, index) => {
-            acc.push({ role: "user", content: prevChat.question });
-            if (prevChat.answer) {
-              acc.push({ role: "assistant", content: prevChat.answer });
-            }
-            return acc;
-          }, [] as Message[]);
-
-        messages.push({
-          role: "user",
-          content: `${scrapedData}\n\nQuestion: ${chat.question}`,
-        });
-
-        dispatch(
-          addMessage({
-            threadId: props.id,
-            message: {
-              role: "user",
-              content: `${scrapedData}\n\nQuestion: ${chat.question}`,
-            },
-          })
-        );
-      }
-    } else {
-      messages = getInitialMessages(chat, scrapedData);
-      messages.forEach((message) => {
-        dispatch(addMessage({ threadId: props.id, message }));
-      });
-    }
-
-    if (ai.customPrompt.length > 0) {
-      messages.splice(messages.length - 1, 0, {
-        role: "system",
-        content: ai.customPrompt,
-      });
-    }
-
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages,
-          model: chat?.mode === "image" ? "gpt-4-vision-preview" : ai.model,
-          temperature: ai.temperature,
-          max_tokens: ai.maxLength,
-          top_p: ai.topP,
-          frequency_penalty: ai.frequency,
-          presence_penalty: ai.presence,
-        }),
-        signal: newController.signal,
-      });
-
-      if (!response.ok) {
-        setIsLoading(false);
-        setIsStreaming(false);
-        setError("Something went wrong. Please try again later.");
-        setErrorFunction(() => handleAnswer.bind(null, chat, scrapedData));
-        return;
-      }
-
-      setIsLoading(false);
-      if (response.body) {
-        setError("");
-        setIsStreaming(true);
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let answer = "";
-        while (true) {
-          const { value, done } = await reader.read();
-          const text = decoder.decode(value);
-          answer += text;
-          dispatch(
-            updateAnswer({
-              threadId: props.id,
-              chatIndex: chatThread.chats.length - 1,
-              answer: answer,
-            })
-          );
-          if (done) {
-            break;
-          }
-        }
-        dispatch(
-          addMessage({
-            threadId: props.id,
-            message: { role: "assistant", content: answer },
-          })
-        );
-        setIsStreaming(false);
-        setIsCompleted(true);
-        updateFirestore();
-      }
-    } catch (error) {
-      setIsLoading(false);
-      setIsStreaming(false);
-      setIsCompleted(true);
-      if ((error as Error).name === "AbortError") {
-        await updateFirestore();
-        return;
-      }
-      setError("Something went wrong. Please try again later.");
-      setErrorFunction(() => handleAnswer.bind(null, chat, scrapedData));
-    } finally {
-      setController(null);
-    }
-  };
-
   const handleRewrite = async () => {
     console.log("handleRewrite called");
     setIsLoading(true);
@@ -509,7 +343,6 @@ const Chat = (props: Props) => {
         setIsLoading(false);
         setIsStreaming(false);
         setError("Something went wrong. Please try again later.");
-        setErrorFunction(() => handleRewrite);
         return;
       }
 
@@ -561,7 +394,6 @@ const Chat = (props: Props) => {
         return;
       }
       setError("Something went wrong. Please try again later.");
-      setErrorFunction(() => handleRewrite);
     } finally {
       setController(null);
     }
@@ -578,10 +410,7 @@ const Chat = (props: Props) => {
     if (text.trim() !== "") {
       const newChat: ChatType = {
         mode: chatThread?.chats[0].mode === "search" ? "search" : "chat",
-        query:
-          chatThread?.chats[0].mode === "search"
-            ? chatThread?.chats[0].query + " " + text.trim()
-            : "",
+        query: chatThread?.chats[0].mode === "search" ? text.trim() : "",
         question: text,
         answer: "",
       };
@@ -728,9 +557,7 @@ const Chat = (props: Props) => {
         handleSend={handleSend}
         handleFork={handleFork}
         handleRetry={() => {
-          if (errorFunction) {
-            handleRetry(errorFunction);
-          }
+          // ... retry logic if needed
         }}
       />
     </div>
