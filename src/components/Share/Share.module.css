@@ -1,0 +1,104 @@
+.modal {
+  width: 100%;
+  overflow: hidden;
+  background-color: #232323;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.titleContainer {
+  width: 100%;
+  padding: 12px 12px 0px 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: left;
+  color: #edededaa;
+  margin-left: 6px;
+}
+.close {
+  height: 36px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.close:hover {
+  background-color: #161616;
+}
+.container {
+  width: 100%;
+  height: auto;
+  padding: 16px;
+  padding-top: 8px;
+}
+.ogImage {
+  aspect-ratio: 1.91;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  background-color: #161616;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.textContainer {
+  margin: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.question {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  color: #ededed;
+  margin-bottom: 8px;
+}
+.time {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: #8a8a8a;
+}
+.logo {
+  margin: 24px;
+}
+.button {
+  height: 42px;
+  border-radius: 8px;
+  background-color: #35a7ff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.button:hover {
+  opacity: 0.9;
+}
+.buttonText {
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: -0.008em;
+  font-weight: 500;
+  color: #ffffff;
+  margin-left: 8px;
+}

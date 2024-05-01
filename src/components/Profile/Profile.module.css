@@ -1,0 +1,118 @@
+.list {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.titleContainer {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0px 4px;
+}
+.title {
+  font-size: 21px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #e8e8e6;
+}
+.listContainer {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  scrollbar-width: none;
+}
+.profile {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.profileImage {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 32px;
+}
+.profileTextContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 4px;
+}
+.profileHeader {
+  width: 100%;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #e8e8e6aa;
+  text-align: left;
+  padding: 8px 12px;
+}
+.profileText {
+  width: 100%;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #e8e8e6;
+  text-align: left;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  border: 1px solid #2e2e2e;
+}
+.button {
+  width: 100%;
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  background-color: #2e2e2e;
+}
+.button:hover {
+  background-color: #ffffff14;
+}
+.deleteButton {
+  width: 100%;
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  background-color: #bd3c3c;
+}
+.deleteButton:hover {
+  background-color: #ff0000aa;
+}
+.bottomContainer {
+  width: 100%;
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}

@@ -1,0 +1,104 @@
+.modal {
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #232323;
+  transition: all 0.25s ease-in-out;
+}
+.titleContainer {
+  width: 100%;
+  padding: 12px 12px 8px 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #edededaa;
+  height: 36px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.text {
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #747474;
+  margin-bottom: 16px;
+}
+.ul {
+  list-style-type: disc;
+  margin-bottom: 16px;
+  padding-left: 16px;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #747474;
+}
+.li {
+  margin-bottom: 24px;
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #747474;
+}
+.close {
+  height: 36px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.close:hover {
+  background-color: #161616;
+}
+.container {
+  width: 100%;
+  height: auto;
+  padding: 16px;
+  border-top: 1px solid #161616;
+}
+.button {
+  height: 42px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 8px;
+  background-color: #bd3c3c;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.button:hover {
+  opacity: 0.9;
+}
+.buttonText {
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: -0.008em;
+  font-weight: 500;
+  color: #ededed;
+}
+.spinner {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}

@@ -35,6 +35,7 @@ We are working on the documentation to help you get started with building plugin
 - [x] Settings for LLMs
 - [x] Custom OG Metadata
 - [ ] Function Calling with Generative UI
+- [ ] Pro Search with Generative UI
 - [ ] Allow Multiple LLMs
 - [ ] Faster API Requests
 - [ ] Use Redis & Postgres
@@ -76,6 +77,6 @@ This project is licensed under the [AGPL-3.0 license](LICENSE).
 
 ## Contact
 
-If you have any questions or suggestions, feel free to reach out to us at [Email](mailto:bishalboss557@gmail.com).
+If you have any questions or suggestions, feel free to reach out to us at [Contact](https://bishalsaha.com/contact).
 
 Happy coding! 🚀

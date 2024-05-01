@@ -1,0 +1,68 @@
+.answerContainer {
+  width: 100%;
+  margin-top: 36px;
+}
+.answerTextRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.answerImg {
+  width: 22px;
+  height: 22px;
+}
+.answerText {
+  width: 100%;
+  font-style: normal;
+  font-size: 21px;
+  line-height: 24px;
+  color: #e8e8e6;
+  margin-left: 2px;
+}
+.answer {
+  width: 100%;
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  color: #e8e8e6;
+}
+.code {
+  padding: 2px;
+  border-radius: 4px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #e8e8e6;
+  background-color: #343941;
+}
+.skeletonAnswer {
+  width: 100%;
+  margin-bottom: 8px;
+  min-height: 10px;
+  border-radius: 6px;
+}
+.citations {
+  text-decoration: none;
+  font-style: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #e8e8e6;
+  padding: 4px 8px;
+  border-radius: 50%;
+  background-color: #8d9191aa;
+  transition: all 0.25s ease-in-out;
+}
+.citations:hover {
+  background-color: #1fb8cd;
+}
+@media (max-width: 512px) {
+  .answerContainer {
+    width: 90%;
+    min-width: auto;
+    margin-left: 5%;
+  }
+}

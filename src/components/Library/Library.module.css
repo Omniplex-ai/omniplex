@@ -1,0 +1,218 @@
+.list {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.modalOverlay {
+  position: fixed;
+  bottom: 0;
+  left: 70px;
+  width: 255px;
+  height: 94%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: linear-gradient(to bottom, #232323aa, #161616);
+}
+.button {
+  cursor: pointer;
+  width: 90%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 500;
+  text-align: center;
+  color: #151515;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background-color: #fff;
+}
+.titleContainer {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  padding: 0px 4px;
+}
+.title {
+  font-size: 21px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #e8e8e6;
+}
+.titleButton {
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  background-color: #2e2e2e;
+}
+.titleButton:hover {
+  background-color: #ffffff14;
+}
+.titleButtonIcon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+.titleButtonText {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.008em;
+  font-weight: 500;
+  color: #ffffff;
+}
+.listContainer {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  scrollbar-width: none;
+}
+.emptyState {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.emptyStateIcon {
+  width: 120px;
+  height: 120px;
+}
+.emptyStateText {
+  width: 80%;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: #e8e8e6aa;
+  text-align: center;
+}
+.skeletonListHeader {
+  height: 16px;
+  width: 30%;
+  padding: 8px 12px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  border-radius: 16px;
+  animation: fadeInFromNone 1000ms ease-in-out;
+  transition: all 1s;
+}
+.skeletonListItem {
+  height: 16px;
+  width: 100%;
+  margin-top: 12px;
+  cursor: pointer;
+  border-radius: 16px;
+  animation: fadeInFromNone 1000ms ease-in-out;
+  transition: all 1s;
+}
+.listHeader {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #e8e8e6aa;
+  padding: 8px 12px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.listItem {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  color: #e8e8e6;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.listItem:hover {
+  background-color: #ffffff14;
+}
+.listItem:hover .bin {
+  opacity: 1;
+}
+.listItem:hover .spinner {
+  opacity: 1;
+}
+.bin {
+  width: 18px;
+  height: 18px;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+.spinner {
+  margin-top: -4px;
+  scale: 0.9;
+  width: 18px;
+  height: 18px;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out;
+}
+@keyframes fadeInFromNone {
+  0% {
+    display: none;
+    opacity: 0;
+  }
+  1% {
+    display: flex;
+    opacity: 0;
+  }
+  100% {
+    display: flex;
+    opacity: 1;
+  }
+}
+
+.button {
+  margin-top: 32px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #ededed;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.button:hover {
+  transform: scale(0.99);
+}
+.buttonText {
+  margin-left: 8px;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: -0.008em;
+  font-weight: 500;
+  color: #151515;
+}

@@ -1,0 +1,48 @@
+.actionRow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 16px;
+}
+.actionContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.25s ease-in-out;
+  margin-bottom: 16px;
+}
+.actionContainer:hover {
+  .action {
+    opacity: 1;
+  }
+  .actionText {
+    color: #e8e8e6;
+  }
+}
+.action {
+  width: 18px;
+  height: 18px;
+  opacity: 0.5;
+  transition: all 0.25s ease-in-out;
+}
+.actionText {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #e8e8e6aa;
+  transition: all 0.25s ease-in-out;
+}
+
+@media (max-width: 512px) {
+  .actionRow {
+    width: 90%;
+    margin-left: 5%;
+  }
+}
