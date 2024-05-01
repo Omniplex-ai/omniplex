@@ -4,7 +4,13 @@ export const runtime = "edge";
 
 async function scrapeText(url: string): Promise<string> {
   try {
-    const response = await fetch(url);
+    const controller = new AbortController(); // Create an AbortController
+    const timeoutId = setTimeout(() => controller.abort(), 1000); // Set timeout
+
+    const response = await fetch(url, { signal: controller.signal }); // Pass the signal
+
+    clearTimeout(timeoutId); // Clear timeout if successful
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -12,7 +18,11 @@ async function scrapeText(url: string): Promise<string> {
     const text = extractBodyText(html);
     return text;
   } catch (error) {
-    console.error(`Error fetching URL ${url}:`, error);
+    if (error.name === 'AbortError') {
+      console.error(`Timeout for URL ${url}`); // Handle timeout
+    } else {
+      console.error(`Error fetching URL ${url}:`, error);
+    }
     return "";
   }
 }
