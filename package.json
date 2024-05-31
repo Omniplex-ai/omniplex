@@ -11,12 +11,14 @@
   "dependencies": {
     "@firebase/firestore": "^4.5.0",
     "@firebase/storage": "^0.12.2",
-    "@headlessui/react": "^1.7.18",
+    "@headlessui/react": "^2.0.3",
     "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/react": "^2.1.1",
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@nextui-org/react": "^2.2.10",
     "@reduxjs/toolkit": "^2.2.3",
+    "@remixicon/react": "^4.2.0",
+    "@tremor/react": "^3.16.3",
     "@types/react-redux": "^7.1.33",
     "@vercel/analytics": "^1.2.2",
     "@vercel/og": "^0.6.2",
@@ -42,8 +44,6 @@
     "rehype-katex": "^7.0.0",
     "rehype-raw": "^7.0.0",
     "rehype-sanitize": "^6.0.0",
-    "remark-gfm": "^4.0.0",
-    "remark-math": "^6.0.0",
     "swiper": "^11.1.1"
   },
   "devDependencies": {

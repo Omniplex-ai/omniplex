@@ -32,7 +32,7 @@
 .toolTipContainer::after {
   content: " ";
   position: absolute;
-  top: 100%; /* At the bottom of the tooltip */
+  top: 100%;
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
@@ -59,6 +59,7 @@
   align-items: center;
   width: 100%;
   padding: 8px;
+  padding-left: 0px;
 }
 .promptText {
   width: 100%;
@@ -67,11 +68,12 @@
   color: #ffffff;
   background-color: transparent;
   border-width: 0px;
-  margin-left: 4px;
   margin-right: 8px;
 }
 .promptText:focus {
   outline: none;
+  outline-color: transparent;
+  box-shadow: none !important;
 }
 .sendButton {
   display: flex;
@@ -107,6 +109,7 @@
   animation: 500ms ease 200ms 1 normal forwards running footer;
   transition: all 1s;
   cursor: pointer;
+  padding-left: 16px;
 }
 .forkContainer {
   display: flex;
@@ -127,6 +130,7 @@
   animation: 500ms ease 200ms 1 normal forwards running footer;
   transition: all 1s;
   cursor: pointer;
+  padding-left: 16px;
 }
 .retryButton {
   display: flex;

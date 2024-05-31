@@ -1,0 +1,141 @@
+.stockContainer {
+  flex: 1;
+  width: auto;
+  min-height: 512px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background-color: #232323;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+}
+.stockHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.companyName {
+  font-style: normal;
+  text-align: left;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  color: #e8e8e6;
+  margin-bottom: 8px;
+}
+.currentPrice {
+  font-style: normal;
+  text-align: right;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  color: #e8e8e6;
+  margin-bottom: 8px;
+}
+.subText {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: #e8e8e6aa;
+}
+.chart {
+  width: 100%;
+  height: 320px;
+  margin-top: 16px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chartDetails {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid #e8e8e6aa;
+  background-color: #232323;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+}
+.chartOverlay {
+  position: absolute;
+  z-index: 5;
+  width: 100%;
+  height: 320px;
+}
+.stockDetails {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 8px;
+  margin-top: 16px;
+  gap: 16px;
+}
+.stockDetailsText {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 24px;
+  color: #e8e8e6aa;
+  margin-top: 8px;
+}
+.customTooltip {
+  background-color: #242424;
+  border: 1px solid #ccc;
+  padding: 4px 12px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.tooltipDate {
+  font-size: 14px;
+  line-height: 18px;
+  margin-bottom: 2px;
+}
+.tooltipPrice {
+  color: #007bff;
+}
+
+.skeletonCompanyName {
+  width: 200px;
+  height: 36px;
+  border-radius: 18px;
+  margin-bottom: 8px;
+}
+.skeletonCurrentPrice {
+  width: 100px;
+  height: 36px;
+  border-radius: 18px;
+  margin-bottom: 8px;
+}
+.skeletonSubText {
+  width: 250px;
+  height: 14px;
+  border-radius: 7px;
+}
+.skeletonSubText2 {
+  width: 100px;
+  height: 14px;
+  border-radius: 7px;
+}
+.skeletonStockDetailsText {
+  width: 100px;
+  height: 14px;
+  border-radius: 7px;
+  margin-top: 8px;
+}
+
+@media (max-width: 512px) {
+  .stockHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    gap: 24px;
+  }
+  .skeletonStockDetailsText {
+    width: 60px;
+  }
+}

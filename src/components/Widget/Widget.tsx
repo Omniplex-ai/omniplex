@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Widget.module.css";
 import Image from "next/image";
+import { SearchType } from "@/utils/types";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -14,13 +15,13 @@ import PrevArrow from "../../../public/svgs/PrevArrow.svg";
 import NextArrow from "../../../public/svgs/NextArrow.svg";
 import PlayIcon from "../../../public/svgs/Play.svg";
 
-type Props = {
-  data: any;
+type searchProps = {
+  searchResults?: SearchType;
 };
 
-const Widget = (props: Props) => {
-  const images = props.data?.images?.value;
-  const videos = props.data?.videos?.value;
+const Widget = ({ searchResults }: searchProps) => {
+  const images = searchResults?.data?.images?.value;
+  const videos = searchResults?.data?.videos?.value;
   const [openMedia, setOpenMedia] = useState<"picture" | "video" | null>(null);
 
   const openInNewWindow = (url: string) => {

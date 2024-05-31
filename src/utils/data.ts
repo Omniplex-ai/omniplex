@@ -45,6 +45,8 @@ export const focusOptions = [
 ];
 
 export const MODELS = [
+  { label: "gpt-4o", value: "gpt-4o" },
+  { label: "gpt-4-turbo-2024-04-09", value: "gpt-4-turbo-2024-04-09" },
   { label: "gpt-4-turbo-preview", value: "gpt-4-turbo-preview" },
   { label: "gpt-4-1106-review", value: "gpt-4-1106-review" },
   { label: "gpt-4-0613", value: "gpt-4-0613" },
@@ -57,4 +59,28 @@ export const MODELS = [
   { label: "gpt-3.5-turbo-0301", value: "gpt-3.5-turbo-0301" },
   { label: "gpt-3.5-turbo-0125", value: "gpt-3.5-turbo-0125" },
   { label: "gpt-3.5-turbo", value: "gpt-3.5-turbo" },
+];
+
+export const PLUGINS = [
+  {
+    tag: "Built In",
+    name: "Stocks",
+    comingSoon: false,
+    url: "/plugins/stocks",
+    description: "Check stock prices",
+  },
+  {
+    tag: "Built In",
+    name: "Weather",
+    comingSoon: false,
+    url: "/plugins/weather",
+    description: "Weather forecast",
+  },
+  {
+    tag: "Built In",
+    name: "Dictionary",
+    comingSoon: false,
+    url: "/plugins/dictionary",
+    description: "Look up word definitions",
+  },
 ];

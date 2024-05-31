@@ -60,17 +60,20 @@ export const getCurrentDateUTC = (): string => {
   return `${dayName}, ${monthName} ${day}, ${year} ${hours}:${minutes}:${seconds} UTC`;
 };
 
-export const getInitialMessages = (
-  chat: Chat,
-  scrapedData?: string
-): Message[] => {
+export const getInitialMessages = (chat: Chat, data?: string): Message[] => {
+  const date = getCurrentDateUTC();
   if (chat.mode === "image") {
     return [
       {
         role: "user",
         content: [
           { type: "text", text: chat.question || "" },
-          { type: "image_url", image_url: chat.fileInfo?.url || "" },
+          {
+            type: "image_url",
+            image_url: {
+              url: chat.fileInfo?.url || "",
+            },
+          },
         ],
       },
     ];
@@ -80,7 +83,6 @@ export const getInitialMessages = (
       { role: "user", content: chat.question || "" },
     ];
   } else if (chat.mode === "search") {
-    const date = getCurrentDateUTC();
     return [
       {
         role: "system",
@@ -92,11 +94,57 @@ export const getInitialMessages = (
           "Combine search results together into a coherent answer." +
           "Do not repeat text. Cite search results using [{number}] notation." +
           "Only cite the most relevant results that answer the question accurately." +
-          "If different results refer to different entities with the same name, write separate answers for each entity.",
+          "If different results refer to different entities with the same name, write separate answers for each entity." +
+          "You have the ability to search and will be given websites and the scarped data from them and you will have to make up an answer with that only" +
+          "You must must provide citations in the format of [{number}] and it sharts with [{1}].",
       },
       {
         role: "user",
-        content: `${scrapedData}\n\nQuestion: ${chat.question}`,
+        content: `${data}\n\nQuestion: ${chat.question}`,
+      },
+    ];
+  } else if (chat.mode === "weather") {
+    return [
+      {
+        role: "system",
+        content:
+          "Generate a comprehensive and informative answer (but no more than 256 words in 2 paragraphs) for a given question solely based on the provided on the users question and api response." +
+          "Talk about the weather answering questions combing the api response and user question" +
+          "Use an unbiased and journalistic tone." +
+          `Use this current date and time: ${date}.`,
+      },
+      {
+        role: "user",
+        content: `${data}\n\nQuestion: ${chat.question}`,
+      },
+    ];
+  } else if (chat.mode === "stock") {
+    return [
+      {
+        role: "system",
+        content:
+          "Generate a comprehensive and informative answer (but no more than 256 words in 2 paragraphs) for a given question solely based on the provided on the users question and api response." +
+          "Talk about the stock answering questions combing the api response and user question" +
+          "Use an unbiased and journalistic tone." +
+          `Use this current date and time: ${date}.`,
+      },
+      {
+        role: "user",
+        content: `${data}\n\nQuestion: ${chat.question}`,
+      },
+    ];
+  } else if (chat.mode === "dictionary") {
+    return [
+      {
+        role: "system",
+        content:
+          "Generate a comprehensive and informative answer (but no more than 256 words in 2 paragraphs) for a given question solely based on the provided on the users question and api response." +
+          "Talk about the dictionary answering questions combing the api response and user question" +
+          "Use an unbiased and journalistic tone.",
+      },
+      {
+        role: "user",
+        content: `${data}\n\nQuestion: ${chat.question}`,
       },
     ];
   } else {

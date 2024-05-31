@@ -1,0 +1,102 @@
+.dictionaryContainer {
+  flex: 1;
+  width: auto;
+  min-height: 200px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background-color: #232323;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+}
+.wordBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.word {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 27px;
+  color: #e8e8e6;
+  margin-bottom: 16px;
+  text-transform: capitalize;
+}
+.phonetic {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+}
+.text {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #e8e8e6;
+}
+.audioContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.audio {
+  padding-top: 2px;
+  width: 32px;
+  height: 32px;
+}
+.meaningBlock {
+  margin-bottom: 8px;
+}
+.partOfSpeech {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 18px;
+  color: #34a853;
+  margin-bottom: 8px;
+}
+.definition {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 18px;
+  color: #e8e8e6aa;
+}
+.definitionText {
+  font-style: normal;
+  font-size: 16px;
+  line-height: 18px;
+  color: #e8e8e6;
+  margin-bottom: 4px;
+}
+
+.skeletonWord {
+  width: 64px;
+  height: 24px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.skeletonText {
+  width: 50px;
+  height: 16px;
+  border-radius: 8px;
+  margin-top: -8px;
+}
+.skeletonPartOfSpeech {
+  width: 32px;
+  height: 16px;
+  border-radius: 16px;
+  margin-bottom: 8px;
+}
+.skeletonDefinition {
+  height: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}

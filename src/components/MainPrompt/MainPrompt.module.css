@@ -69,10 +69,11 @@
   margin-right: 8px;
   margin-bottom: 8px;
   padding: 4px 8px;
-  /* background-color: red; */
 }
 .promptText:focus {
   outline: none;
+  outline-color: transparent;
+  box-shadow: none !important;
 }
 .mainRow {
   display: flex;

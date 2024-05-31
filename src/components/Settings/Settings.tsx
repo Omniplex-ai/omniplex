@@ -110,7 +110,7 @@ const Settings = () => {
     dispatch(resetAISettings());
   };
 
-  const handleModal = (text: string) => {
+  const handleModal = () => {
     onOpen();
   };
 
@@ -135,7 +135,7 @@ const Settings = () => {
           <div className={styles.listRow}>
             <div className={styles.listHeader}>Model</div>
             <Tooltip
-              content="For Images, you can only use GPT-4V"
+              content="For Images, we only use GPT-4o"
               color={"warning"}
               placement={"bottom-end"}
               className={styles.tooltip}
@@ -272,10 +272,7 @@ const Settings = () => {
       {!isAuthenticated && (
         <div className={styles.modalOverlay}>
           {!isAuthenticated && (
-            <div
-              className={styles.modalButton}
-              onClick={() => handleModal("Auth")}
-            >
+            <div className={styles.modalButton} onClick={() => handleModal()}>
               Sign In
             </div>
           )}

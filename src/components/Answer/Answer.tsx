@@ -2,8 +2,6 @@ import React from "react";
 import styles from "./Answer.module.css";
 import Image from "next/image";
 import Markdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkMath from "remark-math";
 import rehypeRaw from "rehype-raw";
 import rehypeKatex from "rehype-katex";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -59,16 +57,11 @@ const Answer = (props: Props) => {
           <Skeleton className={styles.skeletonAnswer} />
           <Skeleton className={styles.skeletonAnswer} />
           <Skeleton className={styles.skeletonAnswer} />
-          <Skeleton className={styles.skeletonAnswer} />
-          <Skeleton className={styles.skeletonAnswer} />
-          <Skeleton className={styles.skeletonAnswer} />
-          <Skeleton className={styles.skeletonAnswer} />
         </div>
       ) : (
         <div className="prose dark:prose-invert break-words prose-p:p-0 prose-pre:p-0 prose-code:m-0">
           <Markdown
             className={styles.answer}
-            remarkPlugins={[remarkGfm, remarkMath]}
             rehypePlugins={[rehypeKatex, rehypeRaw]}
             components={{
               code(props) {

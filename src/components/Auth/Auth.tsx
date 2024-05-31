@@ -31,12 +31,7 @@ const Auth = (props: Props) => {
       const userRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userRef);
 
-      let subscribed = false;
-
       if (userDoc.exists()) {
-        const userData = userDoc.data();
-        subscribed = userData?.userDetails.subscribed ?? false;
-        console.log("subscribed");
         await setDoc(
           userRef,
           {
@@ -54,7 +49,6 @@ const Auth = (props: Props) => {
             email: user.email,
             name: user.displayName,
             profilePic: user.photoURL,
-            subscribed: false,
             createdAt: serverTimestamp(),
           },
         });

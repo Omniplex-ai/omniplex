@@ -34,6 +34,60 @@
   padding-bottom: 16px;
   scrollbar-width: none;
 }
+.listHeader {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #e8e8e6aa;
+  padding: 8px 12px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.listItem {
+  width: 100%;
+  padding: 8px 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.listItem:hover {
+  background-color: #ffffff14;
+}
+.listIconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  margin-right: 8px;
+}
+.listIcon {
+  width: 32px;
+  height: 32px;
+}
+.listItemText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.name {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  color: #e8e8e6;
+  opacity: 0.75;
+}
+.description {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: #e8e8e6aa;
+}
 .emptyState {
   flex: 1;
   width: 100%;
@@ -55,4 +109,44 @@
   font-weight: 500;
   color: #e8e8e6aa;
   text-align: center;
+}
+
+.modalOverlay {
+  position: fixed;
+  bottom: 0;
+  left: 70px;
+  width: 255px;
+  height: 94%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background: linear-gradient(to bottom, #232323aa, #161616);
+}
+.button {
+  cursor: pointer;
+  width: 90%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 500;
+  text-align: center;
+  color: #151515;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background-color: #fff;
+}
+.button:hover {
+  transform: scale(0.99);
+}
+.buttonText {
+  margin-left: 8px;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: -0.008em;
+  font-weight: 500;
+  color: #151515;
 }

@@ -1,0 +1,135 @@
+.weatherContainer {
+  flex: 1;
+  width: auto;
+  min-height: 214px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background-color: #232323;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+}
+.weatherRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: 24px;
+}
+.cityName {
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #e8e8e6;
+  margin-bottom: 8px;
+}
+.currentTemp {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 42px;
+  color: #e8e8e6;
+}
+.weatherInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+.weatherIcon {
+  width: 32px;
+  height: 32px;
+}
+.weatherCondition {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  color: #e8e8e6;
+  text-align: right;
+}
+.tempRange {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #e8e8e6aa;
+  text-align: right;
+}
+.hourlyForecast {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.hour {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #e8e8e6aa;
+  text-align: center;
+}
+.weatherForcastIcon {
+  width: 50px;
+  height: 50px;
+}
+.hourTemp {
+  width: 100%;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #e8e8e6;
+  text-align: center;
+}
+
+.skeletonCityName {
+  width: 64px;
+  height: 18px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.skeletonCurrentTemp {
+  width: 100px;
+  height: 32px;
+  border-radius: 16px;
+}
+.skeletonWeatherIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin: 2px 0px;
+}
+.skeletonWeatherCondition {
+  width: 64px;
+  height: 18px;
+  border-radius: 10px;
+  margin: 2px 0px;
+}
+.skeletonTempRange {
+  width: 100px;
+  height: 14px;
+  border-radius: 8px;
+  margin: 2px 0px;
+}
+.skeletonHourlyItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.skeletonHour {
+  width: 32px;
+  height: 14px;
+  border-radius: 8px;
+}
+.skeletonWeatherForcastIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.skeletonHourTemp {
+  width: 32px;
+  height: 20px;
+  border-radius: 10px;
+}

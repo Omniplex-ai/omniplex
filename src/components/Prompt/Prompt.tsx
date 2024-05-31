@@ -10,6 +10,7 @@ import Stop from "../../../public/svgs/Stop.svg";
 type Props = {
   fork?: boolean;
   error: string;
+  block: boolean;
   streaming: boolean;
   handleSend: (text: string) => void;
   handleCancel: () => void;
@@ -52,7 +53,7 @@ const Prompt = (props: Props) => {
         <div className={styles.container}>
           <div className={styles.promptContainer}>
             <input
-              disabled={props.streaming}
+              disabled={props.streaming || props.block}
               placeholder="Ask anything..."
               className={styles.promptText}
               value={text}

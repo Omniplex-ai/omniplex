@@ -1,0 +1,36 @@
+.skeletonContainer {
+  margin-top: 36px;
+}
+.skeletonTextRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.skeletonImg {
+  width: 24px;
+  height: 24px;
+  border-radius: 24px;
+}
+.skeletonText {
+  width: 40%;
+  min-height: 16px;
+  border-radius: 12px;
+}
+.skeletonLine {
+  width: 100%;
+  margin-bottom: 8px;
+  min-height: 12px;
+  border-radius: 6px;
+}
+@media (max-width: 512px) {
+  .container {
+    padding-top: 72px;
+  }
+  .skeletonContainer {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}

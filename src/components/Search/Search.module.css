@@ -1,0 +1,108 @@
+.sourceRow {
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 8px;
+  scrollbar-width: none;
+}
+.sourceRow::-webkit-scrollbar {
+  display: none;
+}
+.skeletonBox {
+  flex: 1;
+  width: auto;
+  min-height: 100px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+.sourceBox {
+  flex: 1;
+  width: auto;
+  min-height: 100px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background-color: #232323;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.sourceBox:hover {
+  scale: 0.98;
+  background-color: #ffffff14;
+}
+.sourceBoxText {
+  font-style: thin;
+  font-size: 14px;
+  line-height: 16px;
+  color: #e8e8e6;
+  margin-bottom: 12px;
+}
+.sourceBoxRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.sourceFavicon {
+  width: 16px;
+  height: 16px;
+  border-radius: 24px;
+  background-color: #e8e8e6;
+}
+.sourceFaviconText {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #e8e8e6;
+  margin-left: 4px;
+}
+.dot {
+  margin-left: 8px;
+  margin-top: 2px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #e8e8e6;
+}
+.sourceIndex {
+  margin-left: 8px;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #e8e8e6aa;
+}
+@media (max-width: 512px) {
+  .sourceRow {
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 24px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .skeletonBox {
+    width: max-content;
+    flex: content;
+    min-width: 256px;
+    min-height: 100px;
+  }
+  .sourceBox {
+    width: max-content;
+    flex: content;
+    min-width: 256px;
+    min-height: 100px;
+  }
+  .sourceBoxRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}

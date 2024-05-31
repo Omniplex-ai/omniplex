@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import styles from "./MainPrompt.module.css";
@@ -17,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUserDetailsState, selectAuthState } from "@/store/authSlice";
 import { db } from "../../../firebaseConfig";
 import { storage } from "../../../firebaseConfig";
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, setDoc, writeBatch } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 import Arrow from "../../../public/svgs/Arrow.svg";
@@ -40,7 +42,7 @@ const MainPrompt = () => {
   const [width, setWidth] = useState(0);
   const [modal, setModal] = useState("");
   const [loading, setLoading] = useState(false);
-  const [mode, setMode] = useState<Mode>("search");
+  const [mode, setMode] = useState<Mode>("");
   const [buttonText, setButtonText] = useState("Attach");
   const [fileInfo, setFileInfo] = useState<FileInfo | null>(null);
   const [open, setOpen] = useState(false);
@@ -64,7 +66,9 @@ const MainPrompt = () => {
     query: string,
     icon: StaticImageData
   ) => {
-    if (website === "Writing") {
+    if (website === "Focus") {
+      setMode("");
+    } else if (website === "Writing") {
       setMode("chat");
     } else {
       setMode("search");
@@ -84,20 +88,22 @@ const MainPrompt = () => {
         query: focus.query,
         ...(fileInfo && { fileInfo }),
       };
+      console.log("Chat Mode: ", currentMode);
 
       if (userId) {
         try {
-          console.log("Adding document...");
-          const historyRef = collection(db, "users", userId, "history");
-          await setDoc(doc(historyRef, id), {
+          console.log("Adding document...", userId);
+          const batch = writeBatch(db);
+          const historyRef = doc(db, "users", userId, "history", id);
+          const indexRef = doc(db, "index", id);
+          batch.set(historyRef, {
             chats: [chatObject],
             messages: [],
             createdAt: new Date(),
           });
-          const indexRef = doc(db, "index", id);
-          await setDoc(indexRef, {
-            userId,
-          });
+          batch.set(indexRef, { userId });
+          await batch.commit();
+          console.log("Documents added successfully.");
         } catch (error) {
           console.error("Error adding document: ", error);
           toast.error("Something went wrong", {

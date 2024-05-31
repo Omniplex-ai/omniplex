@@ -1,0 +1,64 @@
+.fileBox {
+  flex: 1;
+  width: auto;
+  height: 100px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background-color: #232323;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  flex-direction: row;
+}
+.fileBox:hover {
+  scale: 0.98;
+  background-color: #ffffff14;
+}
+.fileImage {
+  width: 100px;
+  height: 120px;
+  position: relative;
+  top: 10;
+}
+.fileBoxTextContainer {
+  margin-left: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+}
+.fileName {
+  font-style: normal;
+  font-size: 18px;
+  line-height: 24px;
+  color: #e8e8e6;
+}
+.fileTextRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.fileSizeText {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #e8e8e6;
+}
+.fileDate {
+  margin-left: 8px;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #e8e8e6aa;
+}
+.dot {
+  margin-left: 8px;
+  margin-top: 2px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #e8e8e6;
+}
