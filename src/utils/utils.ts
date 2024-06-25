@@ -96,7 +96,7 @@ export const getInitialMessages = (chat: Chat, data?: string): Message[] => {
           "Only cite the most relevant results that answer the question accurately." +
           "If different results refer to different entities with the same name, write separate answers for each entity." +
           "You have the ability to search and will be given websites and the scarped data from them and you will have to make up an answer with that only" +
-          "You must must provide citations in the format of [{number}] and it sharts with [{1}].",
+          "You must must provide citations in the format of [{number}] and it starts with [{1}].",
       },
       {
         role: "user",
