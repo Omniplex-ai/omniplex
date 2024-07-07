@@ -28,13 +28,7 @@ To run the project, modify the code in the Chat component to use the `// Develop
 git clone git@github.com:[YOUR_GITHUB_ACCOUNT]/omniplex.git
 ```
 
-2. Install the dependencies
-
-```bash
-yarn
-```
-
-3. Fill out secrets in `.env.local`
+2. Fill out secrets in `.env.local`
 
 ```bash
 BING_API_KEY=
@@ -45,10 +39,21 @@ ALPHA_VANTAGE_API_KEY=
 FINNHUB_API_KEY=
 ```
 
-4. Run the development server
+3. Fill out your app data in `firebaseConfig.js`
+```
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
+```
+
+4. Run the development server with docker
 
 ```bash
-yarn dev
+docker compose up
 ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
