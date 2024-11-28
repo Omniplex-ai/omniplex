@@ -1,79 +1,161 @@
 .modal {
-  width: 100%;
-  overflow: hidden;
-  cursor: pointer;
-  background-color: #232323;
-  transition: all 0.25s ease-in-out;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: #232323;
+	transition: all 0.25s ease-in-out;
 }
 .titleContainer {
-  width: 100%;
-  padding: 12px 12px 0px 12px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: center;
+	font-family: 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', Times,
+		serif;
 }
 .title {
-  font-style: normal;
-  font-weight: 600;
-  font-size: 18px;
-  line-height: 24px;
-  text-align: left;
-  color: #edededaa;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 24px;
+	text-align: left;
+	color: #ffffff;
 }
 .text {
-  font-size: 16px;
-  line-height: 21px;
-  font-weight: 500;
-  color: #747474;
-  margin-top: 8px;
+	font-size: 18px;
+	line-height: 21px;
+	font-weight: 600;
+	color: #ffffff;
+	margin-top: 8px;
 }
 .close {
-  height: 36px;
-  padding-left: 8px;
-  padding-right: 8px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.25s ease-in-out;
+	height: 36px;
+	padding-left: 8px;
+	padding-right: 8px;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	align-self: flex-start;
+	cursor: pointer;
+	transition: all 0.25s ease-in-out;
 }
 .close:hover {
-  background-color: #161616;
+	background-color: #161616;
 }
 .container {
-  width: 100%;
-  height: auto;
-  padding: 16px;
-  padding-top: 0px;
+	width: 100%;
+	height: auto;
+	padding: 16px;
+	padding-top: 0px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
+
 .button {
-  margin-top: 32px;
-  margin-bottom: 16px;
-  height: 42px;
-  border-radius: 8px;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.25s ease-in-out;
+	margin-top: 32px;
+	margin-bottom: 16px;
+	height: 42px;
+	width: 100%;
+	border-radius: 8px;
+	background-color: #ffffff;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: all 0.25s ease-in-out;
 }
 .button:hover {
-  transform: scale(0.99);
+	transform: scale(0.99);
 }
 .buttonText {
-  margin-left: 8px;
-  font-size: 16px;
-  line-height: 18px;
-  letter-spacing: -0.008em;
-  font-weight: 500;
-  color: #151515;
+	margin-left: 8px;
+	font-size: 16px;
+	line-height: 18px;
+	letter-spacing: -0.008em;
+	font-weight: 500;
+	color: #151515;
 }
 .spinner {
-  width: 24px;
-  height: 24px;
+	width: 24px;
+	height: 24px;
+}
+
+.loginPageLogo {
+	height: 60px;
+}
+
+.loginPageContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 50vw;
+	height: 80vh;
+}
+@media screen and (max-width: 768px) {
+	.loginPageContainer {
+		width: 100vw;
+	}
+	.container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+.loginDetailsContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 35%;
+	width: 70%;
+	text-align: center;
+	background-color: #161616;
+	border-radius: 20px;
+	padding: 20px;
+}
+
+.loginPageHeading {
+	font-family: 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', Times,
+		serif;
+	font-size: 32px;
+	text-align: center;
+}
+
+.carouselHolder {
+	width: 50vw;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.cardSmallTitle {
+	font-size: 12px;
+	font-weight: lighter;
+}
+
+.cardColor {
+	background-color: #161616;
+}
+
+.carouselHeading {
+	font-size: 36px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+	.carouselHolder {
+		display: none;
+	}
 }

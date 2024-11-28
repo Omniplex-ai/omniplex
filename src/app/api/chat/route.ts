@@ -1,34 +1,38 @@
-import OpenAI from "openai";
-import { OpenAIStream, StreamingTextResponse } from "ai";
+import { AzureOpenAI } from 'openai';
+import type {
+	ChatCompletion,
+	ChatCompletionCreateParamsNonStreaming,
+} from 'openai/resources/index';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const endpoint = process.env.AZURE_OPENAI_ENDPOINT;
+const apiVersion = '2024-08-01-preview';
+const apiKey = process.env.AZURE_OPENAI_API_KEY;
+const deploymentName = process.env.AZURE_DEPLOYMENT_ID;
 
-export const runtime = "edge";
+function getClient(): AzureOpenAI {
+	return new AzureOpenAI({
+		endpoint,
+		apiKey,
+		apiVersion,
+	});
+}
+
+import { OpenAIStream, StreamingTextResponse } from 'ai';
+
+const openai = getClient();
+
+export const runtime = 'edge';
 
 export async function POST(req: Request) {
-  const {
-    messages,
-    model,
-    temperature,
-    max_tokens,
-    top_p,
-    frequency_penalty,
-    presence_penalty,
-  } = await req.json();
+	const { messages, model } = await req.json();
+	console.log('inside chat api.ts', messages, model);
 
-  const response = await openai.chat.completions.create({
-    stream: true,
-    model: model,
-    temperature: temperature,
-    max_tokens: max_tokens,
-    top_p: top_p,
-    frequency_penalty: frequency_penalty,
-    presence_penalty: presence_penalty,
-    messages: messages,
-  });
+	const response = await openai.chat.completions.create({
+		stream: true,
+		model: model,
+		messages: messages,
+	});
 
-  const stream = OpenAIStream(response);
-  return new StreamingTextResponse(stream);
+	const stream = OpenAIStream(response);
+	return new StreamingTextResponse(stream);
 }
