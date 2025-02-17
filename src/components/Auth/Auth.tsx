@@ -1,3 +1,5 @@
+// auth.tsx
+
 import React, { useState } from "react";
 import styles from "./Auth.module.css";
 import Image from "next/image";
@@ -73,56 +75,56 @@ const Auth = (props: Props) => {
 
   return (
     <Modal
-      size={"lg"}
+      size={"md"}
       radius="md"
       shadow="sm"
       backdrop={"blur"}
       isOpen={props.isOpen}
       onClose={props.onClose}
-      placement="bottom-center"
+      placement="center"
       closeButton={<div></div>}
     >
       <ModalContent>
         {(onClose) => (
           <div className={styles.modal}>
-            <div className={styles.titleContainer}>
-              <div className={styles.title}></div>
-              <div
-                className={styles.close}
-                onClick={() => {
-                  onClose();
-                }}
-              >
-                <Image
-                  width={20}
-                  height={20}
-                  src={"/svgs/CrossWhite.svg"}
-                  alt={"X"}
-                />
-              </div>
-            </div>
             <div className={styles.container}>
-              <div className={styles.title}>Welcome</div>
-              <p className={styles.text}>Let&apos;s Create Your Account</p>
-
-              {loading ? (
-                <div className={styles.button}>
-                  <div className={styles.spinner}>
-                    <Spinner />
-                  </div>
-                  <div className={styles.buttonText}>Signing in</div>
-                </div>
-              ) : (
-                <div className={styles.button} onClick={handleAuth}>
-                  <Image
-                    src={"/svgs/Google.svg"}
-                    alt={"Google"}
-                    width={24}
-                    height={24}
-                  />
-                  <div className={styles.buttonText}>Continue with Google</div>
-                </div>
-              )}
+              <div className={styles.button} onClick={handleAuth}>
+                <Image
+                  src={"/svgs/Google.svg"}
+                  alt={"Google"}
+                  width={24}
+                  height={24}
+                />
+                <div className={styles.buttonText}>Continue with Google</div>
+              </div>
+              <div className={styles.orDivider}>OR</div>
+              <input
+                type="email"
+                placeholder="Enter your personal or work email"
+                className={styles.emailInput}
+              />
+              <div className={styles.continueButton}>Continue with email</div>
+              <div className={styles.terms}>
+                By continuing, you agree to Omniplex's Consumer&nbsp;
+                <a
+                  href="https://omniplex.ai/terms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  Terms
+                </a>
+                , and acknowledge their&nbsp;
+                <a
+                  href="https://omniplex.ai/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  Privacy Policy
+                </a>
+                .
+              </div>
             </div>
           </div>
         )}
