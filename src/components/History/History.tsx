@@ -162,7 +162,7 @@ const History = () => {
       {!isAuthenticated && (
         <div className={styles.modalOverlay}>
           <div className={styles.button} onClick={handleAuth}>
-            Sign In
+            Login
           </div>
         </div>
       )}

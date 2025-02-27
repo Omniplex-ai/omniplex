@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BING_API_KEY = process.env.BING_API_KEY;
-const BING_SEARCH_URL = "https://api.bing.microsoft.com/v7.0/search";
+const BING_API_KEY = process.env.NEXT_PUBLIC_BING_API_KEY;
+const BING_SEARCH_URL = "https://www.googleapis.com/customsearch/v1";
 
 export const runtime = "edge";
 
@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const response = await fetch(
-      `${BING_SEARCH_URL}?q=${encodeURIComponent(q)}`,
+      `${BING_SEARCH_URL}?key=${BING_API_KEY}&cx=f1dceea33d61240be&q=${encodeURIComponent(q)}`,
       {
         method: "GET",
         headers: new Headers({

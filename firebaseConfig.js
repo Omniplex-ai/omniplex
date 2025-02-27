@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 
 // Firebase Config
 export const firebaseConfig = {
-  apiKey: "",
+  apiKey: process.env.NEXT_PUBLIC_BING_API_KEY,
   authDomain: "",
   projectId: "",
   storageBucket: "",

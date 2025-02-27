@@ -9,6 +9,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "../../../firebaseConfig";
 import Spinner from "../Spinner/Spinner";
+import {otpGenerator, otpVerifier} from "@/app/api/emailGenerator/emailGenerator";
 
 type Props = {
   isOpen: boolean;
@@ -16,6 +17,23 @@ type Props = {
 };
 
 const Auth = (props: Props) => {
+  
+type Login={
+  email: string;
+}
+
+const [loginData, setLoginData] = useState<Login>({
+  email: '',
+})
+
+const [inputClicked, setInputClicked] = useState<boolean>(false);
+
+const [loginClicked, setLoginClicked] = useState<boolean>(false);
+
+const [enteredOTP,setEnteredOTP] = useState<string>("");
+
+const [incorrectOTP, setIncorrectOTP] = useState<boolean>(false);
+
   const router = useRouter();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
@@ -72,8 +90,8 @@ const Auth = (props: Props) => {
   };
 
   return (
-    <Modal
-      size={"lg"}
+    <Modal 
+      size="sm"
       radius="md"
       shadow="sm"
       backdrop={"blur"}
@@ -91,6 +109,11 @@ const Auth = (props: Props) => {
                 className={styles.close}
                 onClick={() => {
                   onClose();
+                  setLoginClicked(false); 
+                  setInputClicked(false);
+                  setLoginData({email:""});
+                  setEnteredOTP("");
+                  setIncorrectOTP(false);
                 }}
               >
                 <Image
@@ -103,7 +126,7 @@ const Auth = (props: Props) => {
             </div>
             <div className={styles.container}>
               <div className={styles.title}>Welcome</div>
-              <p className={styles.text}>Let&apos;s Create Your Account</p>
+              {!loginClicked && <p className={styles.text}>Let&apos;s Create Your Account</p>}
 
               {loading ? (
                 <div className={styles.button}>
@@ -113,6 +136,66 @@ const Auth = (props: Props) => {
                   <div className={styles.buttonText}>Signing in</div>
                 </div>
               ) : (
+                <>
+                <div>
+                  {!loginClicked && <input className={styles.inputField}
+                    name="email"
+                    type="email"
+                    placeholder="Continue with email"
+                    value={loginData.email}
+                    onChange={(e) => {setLoginData({ ...loginData, email: e.target.value });
+                                      setInputClicked(true)}}
+                    autoComplete="off"
+                  />}
+                  {
+                    loginClicked && <h4 className={styles.text} >Verification code sent to <i>{loginData.email}</i></h4>
+                  }
+                  {inputClicked && <>{ !loginClicked &&<button 
+                                        onClick={()=>{
+                                          setLoginClicked(true); 
+                                          otpGenerator(loginData.email); 
+                                          }} 
+                                        className={styles.button}>
+                                          Continue with email
+                                      </button>}</>}
+                  {loginClicked && 
+                  <>
+                    <input  className={styles.inputField} 
+                    name="otpInput" 
+                    type="text" 
+                    placeholder="enter verifying code" 
+                    onChange={(e) => setEnteredOTP(e.target.value)} 
+                    maxLength={6} />
+                    <button 
+                        onClick={()=>{
+                            otpVerifier(enteredOTP).then((verified)=>{
+                              if(verified){
+                                console.log("otp correct");
+                                dispatch(setAuthState(true));
+                                dispatch(setUserDetailsState({
+                                  uid:"",
+                                  email: loginData.email,
+                                  name: (loginData.email).split("@")[0],
+                                  profilePic: "",
+                                }));
+                                setLoading(true);
+                                onClose();
+                              }else{
+                                console.log("incorrect otp");
+                                setEnteredOTP("");
+                                setIncorrectOTP(true);
+                              }
+                            })
+                          }} 
+                        className={styles.button}>
+                          Verify
+                    </button>
+                    {incorrectOTP && <p className={styles.incorrectOTP}>Incorrect OTP</p>}
+                    <button className={styles.resendOTP} onClick={()=>otpGenerator(loginData.email) }>Resend OTP</button>
+                  </>
+                  }
+                </div>
+                <h3 className={styles.centerText}>Or</h3>
                 <div className={styles.button} onClick={handleAuth}>
                   <Image
                     src={"/svgs/Google.svg"}
@@ -122,6 +205,7 @@ const Auth = (props: Props) => {
                   />
                   <div className={styles.buttonText}>Continue with Google</div>
                 </div>
+                </>
               )}
             </div>
           </div>

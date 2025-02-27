@@ -1,26 +1,36 @@
 .modal {
   width: 100%;
+  max-width: 400px;
   overflow: hidden;
   cursor: pointer;
   background-color: #232323;
+  border-radius: 10px;
+  padding: 20px;
   transition: all 0.25s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content */
+  justify-content: center;
+  text-align: center;
 }
+
 .titleContainer {
   width: 100%;
-  padding: 12px 12px 0px 12px;
+  padding: 12px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
+
 .title {
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   line-height: 24px;
-  text-align: left;
   color: #edededaa;
 }
+
 .text {
   font-size: 16px;
   line-height: 21px;
@@ -28,52 +38,130 @@
   color: #747474;
   margin-top: 8px;
 }
+.inputText {
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #676666;
+  margin-top: 8px;
+}
+
 .close {
   height: 36px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 8px;
   border-radius: 8px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 }
+
 .close:hover {
   background-color: #161616;
 }
+
 .container {
   width: 100%;
-  height: auto;
-  padding: 16px;
-  padding-top: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.inputField {
+  width: 90%;
+  max-width: 300px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  margin: 10px 0;
+  text-align: center;
+  color: #757575;
+}
+
+.inputField:focus {
+  border-color: #4a90e2;
+  box-shadow: 0px 0px 5px rgba(74, 144, 226, 0.3);
+}
+
 .button {
-  margin-top: 32px;
-  margin-bottom: 16px;
+  width: 90%;
+  max-width: 300px;
   height: 42px;
   border-radius: 8px;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.25s ease-in-out;
-}
-.button:hover {
-  transform: scale(0.99);
-}
-.buttonText {
-  margin-left: 8px;
+  background-color: #4a90e2;
+  color: white;
   font-size: 16px;
-  line-height: 18px;
-  letter-spacing: -0.008em;
-  font-weight: 500;
-  color: #151515;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px ;
 }
-.spinner {
-  width: 24px;
-  height: 24px;
+
+.button:hover {
+  transform: scale(0.98);
+  background-color: #357ab7;
+}
+
+.resendButton {
+  width: 90%;
+  max-width: 300px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.resendButton:hover {
+  background-color: #218838;
+}
+
+.incorrectOTP {
+
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.authContainer {
+  width: 90%;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+.authContainer:hover {
+  background-color: #f5f5f5;
+}
+
+.authText {
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.centerText {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #bbb;
 }

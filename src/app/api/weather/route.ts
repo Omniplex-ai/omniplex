@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const OPENWEATHERMAP_API_KEY = process.env.OPENWEATHERMAP_API_KEY;
+const OPENWEATHERMAP_API_KEY = process.env.NEXT_PUBLIC_OPENWEATHERMAP_API_KEY;
 const GEOCODING_URL = "http://api.openweathermap.org/geo/1.0/direct";
 const CURRENT_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";
 const FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";

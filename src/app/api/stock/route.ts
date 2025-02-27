@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY;
-const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY;
+const FINNHUB_API_KEY = process.env.NEXT_PUBLIC_FINNHUB_API_KEY;
+const ALPHA_VANTAGE_API_KEY = process.env.NEXT_PUBLIC_ALPHA_VANTAGE_API_KEY;
 
 const fetchJSON = async (url: string) => {
   const response = await fetch(url);
