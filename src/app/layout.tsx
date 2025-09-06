@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import type { Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import "katex/dist/katex.min.css";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import PremiumButton from "@/components/Premium/PremiumButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,8 +63,21 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={inter.className}>
         <Providers>
-          <Sidebar />
-          {children}
+          <div className="flex h-screen w-screen">
+            {/* Sidebar on the left */}
+            <Sidebar />
+
+            {/* Main Content */}
+            <div className="flex-1 relative p-4">
+              {/* Premium button on top-right */}
+              <div className="absolute top-4 right-6 z-50">
+                <PremiumButton />
+              </div>
+
+              {/* Page Content */}
+              {children}
+            </div>
+          </div>
         </Providers>
       </body>
     </html>

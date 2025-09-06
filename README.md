@@ -31,7 +31,7 @@ git clone git@github.com:[YOUR_GITHUB_ACCOUNT]/omniplex.git
 2. Install the dependencies
 
 ```bash
-yarn
+yarn install
 ```
 
 3. Fill out secrets in `.env.local`

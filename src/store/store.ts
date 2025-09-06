@@ -9,7 +9,7 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import storage from "./storage";
 import chatReducer from "./chatSlice";
 import authReducer from "./authSlice";
 import aiReducer from "./aiSlice";
